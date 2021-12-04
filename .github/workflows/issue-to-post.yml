@@ -24,6 +24,10 @@ jobs:
         echo "---" >> $file
         echo "${{ github.event.issue.body }}" >> $file
 
+    - name: Install theme
+      run: |
+        composer install --prefer-dist --no-progress
+    
     - name: Build site
       uses: Cecilapp/Cecil-Action@v3
 
