@@ -1,3 +1,4 @@
 title: My blog
-baseline: my amazing blog
-baseurl: https://cecilapp.github.io/
+baseline: "My amazing blog"
+description: "My amazing blog"
+baseurl: "/"
