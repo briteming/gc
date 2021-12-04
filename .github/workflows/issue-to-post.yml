@@ -1,0 +1,49 @@
+name: Issue to post
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  Build and deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v2
+      
+    - name: Create post
+      run : |
+        file="content/posts/${{ github.event.issue.number }}.md"
+
+        mkdir -p content/blog
+        touch $file
+        echo "---" > $file
+        echo "title: \"${{ github.event.issue.title }}\"" >> $file
+        echo "date: \"${{ github.event.issue.created_at }}\"" >> $file
+        echo "---" >> $file
+        echo "${{ github.event.issue.body }}" >> $file
+
+    - name: Build site
+      uses: Cecilapp/Cecil-Action@v3
+
+    - name: Save content
+      uses: stefanzweifel/git-auto-commit-action@v4
+      id: auto-commit-action
+      with:
+        commit_message: 'New post: ${{ github.event.issue.title }}'
+        commit_options: '--allow-empty'
+        repository: .
+        status_options: '--untracked-files=no'
+        file_pattern: 'content/**/*'
+        push_options: '--force'
+        skip_dirty_check: true
+        skip_fetch: true
+        disable_globbing: true
+
+    - name: Deploy site
+      uses: Cecilapp/GitHub-Pages-deploy@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        email: arnaud@ligny.org
