@@ -42,7 +42,7 @@ jobs:
         commit_options: '--allow-empty'
         repository: .
         status_options: '--untracked-files=no'
-        file_pattern: 'content/**/*'
+        file_pattern: 'drafts/*'
         push_options: '--force'
         skip_dirty_check: true
         skip_fetch: true
@@ -62,6 +62,20 @@ jobs:
         filename="post-${{ github.event.issue.number }}.md"
         mkdir -p $d
         [ ! -f drafts/$filename ] || mv drafts/$filename $dir/ -f
+
+    - name: Save content
+      uses: stefanzweifel/git-auto-commit-action@v4
+      id: auto-commit-action
+      with:
+        commit_message: 'New post: ${{ github.event.issue.title }}'
+        commit_options: '--allow-empty'
+        repository: .
+        status_options: '--untracked-files=no'
+        file_pattern: 'content/**/*'
+        push_options: '--force'
+        skip_dirty_check: true
+        skip_fetch: true
+        disable_globbing: true
 
     - name: Install theme
       run: composer install --prefer-dist --no-progress
