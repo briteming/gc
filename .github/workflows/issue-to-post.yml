@@ -6,7 +6,7 @@ on:
       - opened
 
 jobs:
-  Build and deploy:
+  issue-to-post:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout source
