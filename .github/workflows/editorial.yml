@@ -60,7 +60,7 @@ jobs:
       run : |
         dir="content/blog"
         filename="post-${{ github.event.issue.number }}.md"
-        mkdir -p $d
+        mkdir -p $dir
         [ ! -f drafts/$filename ] || mv drafts/$filename $dir/ -f
 
     - name: Save content
