@@ -59,7 +59,7 @@ jobs:
       run : |
         filename="post-${{ github.event.issue.number }}.md"
         mkdir -p content/blog
-        [ ! -f content/drafts/$filename ] || mv mv content/drafts/$filename content/blog/$filename -f
+        [ ! -f content/drafts/$filename ] || mv mv content/drafts/$filename content/blog/ -f
 
     - name: Install theme
       run: composer install --prefer-dist --no-progress
