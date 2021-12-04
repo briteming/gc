@@ -3,3 +3,4 @@ baseline: "My amazing blog"
 description: "My amazing blog"
 baseurl: "https://cecilapp.github.io/github-cms/"
 canonicalurl: true
+theme: hyde
