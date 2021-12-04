@@ -5,6 +5,14 @@ on:
     types:
     - opened
     - edited
+    - pinned
+    - unpinned
+    - closed
+    - reopened
+    - labeled
+    - unlabeled
+    - locked
+    - unlocked
 
 jobs:
   issue-to-post:
