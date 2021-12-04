@@ -48,6 +48,7 @@ jobs:
         disable_globbing: true
 
   build-and-deploy:
+    needs: issue-to-post
     if: github.event.label.name == 'published'
     runs-on: ubuntu-latest
     steps:
@@ -58,7 +59,7 @@ jobs:
       run : |
         filename="post-${{ github.event.issue.number }}.md"
         mkdir -p content/blog
-        mv content/drafts/$filename content/blog/$filename -f
+        [ ! -f content/drafts/$filename ] || mv mv content/drafts/$filename content/blog/$filename -f
 
     - name: Install theme
       run: composer install --prefer-dist --no-progress
