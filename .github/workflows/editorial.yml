@@ -23,8 +23,9 @@ jobs:
       
     - name: Create post
       run : |
-        file="content/blog/post-${{ github.event.issue.number }}.md"
-        mkdir -p content/blog
+        filename="post-${{ github.event.issue.number }}.md"
+        file="content/drafts/$filename"
+        mkdir -p content/drafts
         touch $file
         echo "---" > $file
         echo "title: \"${{ github.event.issue.title }}\"" >> $file
@@ -52,6 +53,12 @@ jobs:
     steps:
     - name: Checkout source
       uses: actions/checkout@v2
+
+    - name: Move post
+      run : |
+        filename="post-${{ github.event.issue.number }}.md"
+        mkdir -p content/blog
+        mv content/drafts/$filename content/blog/$filename -f
 
     - name: Install theme
       run: composer install --prefer-dist --no-progress
