@@ -23,9 +23,10 @@ jobs:
       
     - name: Create post
       run : |
+        dir="drafts"
         filename="post-${{ github.event.issue.number }}.md"
-        file="content/drafts/$filename"
-        mkdir -p content/drafts
+        file="$dir/$filename"
+        mkdir -p $dir
         touch $file
         echo "---" > $file
         echo "title: \"${{ github.event.issue.title }}\"" >> $file
@@ -57,9 +58,10 @@ jobs:
 
     - name: Move post
       run : |
+        dir="content/blog"
         filename="post-${{ github.event.issue.number }}.md"
-        mkdir -p content/blog
-        [ ! -f content/drafts/$filename ] || mv content/drafts/$filename content/blog/ -f
+        mkdir -p $d
+        [ ! -f drafts/$filename ] || mv drafts/$filename $dir/ -f
 
     - name: Install theme
       run: composer install --prefer-dist --no-progress
