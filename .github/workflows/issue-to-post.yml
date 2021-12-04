@@ -15,7 +15,8 @@ jobs:
       
     - name: Create post
       run : |
-        file="content/blog/${{ github.event.issue.title }}.md"
+        title=${{ github.event.issue.title }} | iconv -t ascii//TRANSLIT | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-z
+        file="content/blog/$title.md"
 
         mkdir -p content/blog
         touch $file
