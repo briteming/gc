@@ -7,7 +7,7 @@ on:
     - unlabeled
 
 jobs:
-  unpublish:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout source
