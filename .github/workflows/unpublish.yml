@@ -25,13 +25,13 @@ jobs:
       id: auto-commit-action
       with:
         commit_message: 'Save unpublished post: ${{ github.event.issue.title }}'
-        commit_options: '--allow-empty'
-        repository: .
-        status_options: '--untracked-files=no'
-        push_options: '--force'
-        skip_dirty_check: true
-        skip_fetch: true
-        disable_globbing: true
+        #commit_options: '--allow-empty'
+        #repository: .
+        #status_options: '--untracked-files=no'
+        #push_options: '--force'
+        #skip_dirty_check: true
+        #skip_fetch: true
+        #disable_globbing: true
 
     - name: Install theme
       run: composer install --prefer-dist --no-progress
