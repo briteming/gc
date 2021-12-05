@@ -5,14 +5,8 @@ on:
     types:
     - opened
     - edited
-    - pinned
-    - unpinned
-    - closed
     - reopened
     - labeled
-    - unlabeled
-    - locked
-    - unlocked
 
 jobs:
   issue-to-post:
@@ -54,14 +48,6 @@ jobs:
     steps:
     - name: Checkout source
       uses: actions/checkout@v2
-
-    - name: Unpublish post
-      if: ${{ github.event.label.name != 'published' }}
-      run : |
-        dir="content/blog"
-        filename="post-${{ github.event.issue.number }}.md"
-        mkdir -p drafts
-        [ ! -f $dir/$filename ] || mv $dir/$filename drafts/ -f
     
     - name: Publish post
       if: ${{ github.event.label.name == 'published' }}
