@@ -1,6 +1,6 @@
-title: My blog
-baseline: "My amazing blog"
-description: "My amazing blog"
-baseurl: "https://cecilapp.github.io/github-cms/"
+title: GitHub-CMS demo
+baseline: "GitHub Issues as a CMS"
+description: "Use GitHub Issues as a CMS for a Cecil blog."
+baseurl: "https://cecilapp.github.io/GitHub-CMS/"
 canonicalurl: true
 theme: hyde
