@@ -24,7 +24,7 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4
       id: auto-commit-action
       with:
-        commit_message: 'New post: ${{ github.event.issue.title }}'
+        commit_message: 'Save unpublished post: ${{ github.event.issue.title }}'
         commit_options: '--allow-empty'
         repository: .
         status_options: '--untracked-files=no'
