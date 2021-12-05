@@ -1,0 +1,47 @@
+name: Unpublish
+
+on:
+  issues:
+    types:
+    - closed
+    - unlabeled
+
+jobs:
+  unpublish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v2
+
+    - name: Unpublish post
+      run : |
+        dir="content/blog"
+        filename="post-${{ github.event.issue.number }}.md"
+        mkdir -p drafts
+        [ ! -f $dir/$filename ] || mv $dir/$filename drafts/ -f
+
+    - name: Save content
+      uses: stefanzweifel/git-auto-commit-action@v4
+      id: auto-commit-action
+      with:
+        commit_message: 'New post: ${{ github.event.issue.title }}'
+        commit_options: '--allow-empty'
+        repository: .
+        status_options: '--untracked-files=no'
+        push_options: '--force'
+        skip_dirty_check: true
+        skip_fetch: true
+        disable_globbing: true
+
+    - name: Install theme
+      run: composer install --prefer-dist --no-progress
+    
+    - name: Build site
+      uses: Cecilapp/Cecil-Action@v3
+
+    - name: Deploy site
+      uses: Cecilapp/GitHub-Pages-deploy@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        email: arnaud@ligny.org
