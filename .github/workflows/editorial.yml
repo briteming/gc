@@ -50,13 +50,21 @@ jobs:
 
   build-and-deploy:
     needs: issue-to-post
-    if: github.event.label.name == 'published'
     runs-on: ubuntu-latest
     steps:
     - name: Checkout source
       uses: actions/checkout@v2
 
-    - name: Move post
+    - name: Unpublish post
+      if: github.event.label.name != 'published'
+      run : |
+        dir="content/blog"
+        filename="post-${{ github.event.issue.number }}.md"
+        mkdir -p drafts
+        [ ! -f $dir/$filename ] || mv $dir/$filename drafts/ -f
+    
+    - name: Publish post
+      if: github.event.label.name == 'published'
       run : |
         dir="content/blog"
         filename="post-${{ github.event.issue.number }}.md"
