@@ -52,7 +52,7 @@ jobs:
     
     - name: Publish post
       run : |
-        dir="content/blog"
+        dir="pages/blog"
         filename="post-${{ github.event.issue.number }}.md"
         mkdir -p $dir
         [ ! -f drafts/$filename ] || mv drafts/$filename $dir/ -f

@@ -15,7 +15,7 @@ jobs:
 
     - name: Unpublish post
       run : |
-        dir="content/blog"
+        dir="pages/blog"
         filename="post-${{ github.event.issue.number }}.md"
         mkdir -p drafts
         [ ! -f $dir/$filename ] || mv $dir/$filename drafts/ -f
