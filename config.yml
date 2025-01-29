@@ -1,6 +1,6 @@
 title: GitHub-CMS demo
 baseline: "GitHub Issues as a CMS"
 description: "Use GitHub Issues as a CMS for a Cecil blog."
-baseurl: "https://cecilapp.github.io/GitHub-CMS/"
+baseurl: "https://briteming.github.io/gc/"
 canonicalurl: true
 theme: hyde
